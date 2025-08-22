@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Track Shipment - SwiftShip Logistics</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <header>
+    <h1>SwiftShip Logistics</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/services.html">Services</a>
+      <a href="/track.html">Track Shipment</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Live Shipment Tracking</h2>
+    <p>Shipment Location: <span id="location">Waiting for updates...</span></p>
+  </main>
+  <script>
+    const socket = io();
+    socket.on("locationUpdate", (data) => {
+      document.getElementById("location").textContent = `Lat: ${data.lat}, Lng: ${data.lng}`;
+    });
+  </script>
+</body>
+</html>
